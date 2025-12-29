@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+env/
+venv/
+.env
+
+# IDE settings
+.vscode/
+.idea/
+
+# wandb
+wandb/
+
+# checkpoints
+checkpoints/
+
+# model weights
+*.pth
+*.pt

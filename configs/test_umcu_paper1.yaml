@@ -1,0 +1,32 @@
+# --- Basic Setup ---
+name: qstar
+suffix: paper_PD0p1_TV0p01_lq20
+gpu_ids: '0'
+checkpoints_dir: checkpoints/trained_model_paper
+model: qmap_synth   
+phase: test
+
+# --- Data ---
+dataroot: example_data
+data_csv_name: _example.csv
+input_nc: 3
+output_nc: 3
+batchSize: 16
+input_scan_types: T1w,T2w,FLAIR
+padcrop: 224       
+eval_size: 1
+
+# --- Generator / Network ---
+which_model_netG: shared_attn_unet
+feature_channels_G: 64,128,256
+which_epoch: latest
+
+# --- Processing / Rescaling ---
+rescaling_method: closed_form_least_squares
+
+# --- Logging / Eval ---
+results_dir: test_T1wT2wFLAIR_example/
+save_val_nifti: true
+save_images_visualizer: true
+eval_qstar_tissue_values: true
+
