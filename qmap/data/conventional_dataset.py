@@ -112,7 +112,7 @@ def _create_subject(row, root, opt):
         'brain_mask': tio.LabelMap(os.path.join(dir_msk, sub_id + '_brain.nii.gz')),
         
         # Sequence Params
-        'T1w_TR': row['T1w_TR'], 'T1w_TE': row['T1w_TE'], 'T1w_FA': row['T1w_FA'], #'T1w_TI': row['T1w_TI'],
+        'T1w_TR': row['T1w_TR'], 'T1w_TE': row['T1w_TE'], 'T1w_FA': row['T1w_FA'], 'T1w_TI': row.get('T1w_TI', None),
         'T2w_TR': row['T2w_TR'], 'T2w_TE': row['T2w_TE'], 'T2w_FA': row['T2w_FA'],
         'FLAIR_TR': row['FLAIR_TR'], 'FLAIR_TE': row['FLAIR_TE'], 'FLAIR_TI': row['FLAIR_TI'], 'FLAIR_FA': row['FLAIR_FA'],
         
@@ -122,7 +122,7 @@ def _create_subject(row, root, opt):
         'FLAIR_rescaling_factor': row['FLAIR_rescale'],
         
         # Sequence Types (with defaults)
-        'T1w_seq_type': row.get('T1w_seq_type', 'TFE'),
+        'T1w_seq_type': row.get('T1w_seq_type', 'GRE'),
         'T2w_seq_type': row.get('T2w_seq_type', 'TSE'),
         'FLAIR_seq_type': row.get('FLAIR_seq_type', 'IR'),
     }

@@ -18,9 +18,6 @@ venv/
 # wandb
 wandb/
 
-# checkpoints
-checkpoints/
-
 # model weights
 *.pth
 *.pt

@@ -20,7 +20,6 @@ def get_norm_layer(norm_type='instance'):
         raise NotImplementedError('normalization layer [%s] is not found' % norm_type)
     return norm_layer
 
-
 def get_scheduler(optimizer, opt):
     if opt.lr_policy == 'none':
         return lr_scheduler.StepLR(optimizer, step_size=1000000, gamma=1.0)
@@ -63,7 +62,6 @@ def init_weights(net, init_type='normal', gain=0.02):
     print('initialize network with %s' % init_type)
     net.apply(init_func)
 
-
 def init_net(net, init_type='normal', init_gain=0.02, gpu_ids=[]):
     if len(gpu_ids) > 0:
         assert (torch.cuda.is_available())
@@ -84,7 +82,6 @@ def define_G(opt, input_nc, output_nc, which_model_netG, encoder_norm='instance'
     else:
         raise NotImplementedError('Generator model name [%s] is not recognized' % which_model_netG)
     return init_net(netG, init_type, init_gain, gpu_ids)
-
 
 
 ## ResUnet ##
@@ -487,8 +484,7 @@ class SharedAttnUNet(nn.Module):
 
 
 class SharedAttnUNetDrop(nn.Module):
-    """U-Net with shared encoder weights and attention fusion, matching depth of standard U-Net."""
-
+    """U-Net with shared encoder weights and attention fusion"""
     def __init__(
         self,
         input_channels: int = 1,
@@ -577,4 +573,6 @@ class SharedAttnUNetDrop(nn.Module):
             x = dec(x, skip)
 
         return self.output_layer(x)
+    
+    
     

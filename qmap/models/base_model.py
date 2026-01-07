@@ -121,12 +121,8 @@ class BaseModel:
             if self.opt.phase != "val":
                 print(f"Loading the model from {load_path}")
 
-            # Load the state_dict (these weights were saved on CPU). 
-            # map_location=self.device ensures they land on the correct device.
             state_dict = torch.load(load_path, map_location=self.device)
 
-            # Load exactly matching keys. Because we saved from net.module (or net) on CPU,
-            # the keys line up perfectly with net (or net.module) here.
             net.load_state_dict(state_dict, strict=True)
             
             print(f"Successfully loaded model weights for net{name}.")

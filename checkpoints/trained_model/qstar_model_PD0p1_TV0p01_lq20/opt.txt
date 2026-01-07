@@ -1,0 +1,71 @@
+----------------- Options ---------------
+                batchSize: 16                            
+                    beta1: 0.9                           
+          bottleneck_norm: instance                      
+  calc_additional_metrics: True                          
+          checkpoints_dir: checkpoints/trained_model
+                   config: configs/train.yaml	[default: None]
+           continue_train: False                         
+             decoder_norm: instance                      
+                   do_val: True                          
+  dropout_prob_bottleneck: 0.0                           
+     dropout_prob_decoder: 0.0                           
+             encoder_norm: instance                      
+        epoch_count_start: 1                             
+ eval_qstar_tissue_values: False                         
+                eval_size: 5                             
+       feature_channels_G: [64, 128, 256]                	[default: 64,128,256]
+                  gpu_ids: [0]                           	[default: 0]
+                init_gain: 0.02                          
+                init_type: kaiming                       
+                 input_nc: 3                             
+         input_scan_types: ['T1w', 'T2w', 'FLAIR']       	[default: T1w,T2w,FLAIR]
+                  isTrain: True                          	[default: None]
+       loss_PD_constraint: 0.1                           
+            loss_PD_prior: 0                             
+        loss_content_I_l1: 1                             
+        loss_content_I_l2: 0                             
+     loss_content_pearson: 0                             
+              loss_tv_reg: 0.01                          
+                 loss_vgg: 0.0                           
+                       lr: 0.001                         
+           lr_decay_iters: 50                            
+                lr_policy: none                          
+          max_queuelength: 1024                          
+  modality_dropout_burnin: 0                             
+modality_dropout_max_missing: 1                             
+    modality_dropout_rate: 0.5                           
+                    model: qmap_synth                    
+                 n_epochs: 100                           
+          n_warmup_epochs: 1                             
+                     name: qstar_paper_PD0p1_TV0p01_lq20 	[default: qstar]
+              niter_decay: 0                             
+                   norm_G: instance                      
+                optimizer: adam                          
+                output_nc: 3                             
+        oversample_T1w_SE: False                         
+                  padcrop: 224                           
+       patches_per_volume: 8                             
+                    phase: train                         
+               print_freq: 100                           
+              random_seed: 0                             
+  rescaling_factor_bounds: 0.2                           
+         rescaling_method: closed_form_least_squares_bounded
+              results_dir: ./results/                    
+          save_epoch_freq: 5                             
+   save_images_visualizer: False                         
+         save_latest_freq: 5                             
+           save_val_nifti: False                         
+                     seed: 0                             
+           single_subject: False                         
+                   suffix: model_PD0p1_TV0p01_lq20       
+              train_phase: generator                     
+        train_subset_size: 10                            
+      use_mixed_precision: False                         
+    use_volunteer_dataset: False                         
+                use_wandb: True                          
+                  verbose: False                         
+             weight_decay: 0.0                           
+         which_epoch_load: latest                        
+         which_model_netG: shared_attn_unet              
+----------------- End -------------------

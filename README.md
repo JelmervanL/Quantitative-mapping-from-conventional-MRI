@@ -1,16 +1,15 @@
 
 # Self-Supervised Physics-Guided Quantitative Mapping from Conventional MRI
 
-This repository contains the implementation of the paper: **"Quantitative Mapping from Conventional MRI Using Self-Supervised Physics-Guided Deep Learning: Applications to a Large-Scale, Heterogeneous Clinical Dataset"**.
+This repository contains the implementation of the paper: **"Quantitative Mapping from Conventional MRI Using Self-Supervised Physics-Guided Deep Learning: Applications to a Large-Scale, Clinically Heterogeneous Dataset"**.
 
 ## 📋 Abstract
-
-Magnetic resonance imaging (MRI) is a cornerstone of clinical neuroimaging, yet conventional MRIs provide qualitative information heavily dependent on scanner hardware and acquisition settings. While quantitative MRI (qMRI) offers intrinsic tissue parameters, the requirement for specialized acquisition protocols and reconstruction algorithms restricts its availability and impedes large-scale biomarker research.  This study presents a self-supervised physics-guided deep learning framework to infer quantitative T1, T2, and proton-density (PD) maps directly from widely available clinical conventional T1-weighted, T2-weighted, and FLAIR MRIs. The framework was trained and evaluated on a large-scale, heterogeneous clinical dataset comprising 4,121 scan sessions acquired over six years on four different 3 T scanner systems, capturing real-world clinical variability. The framework integrates Bloch-based signal models directly into the training objective. Across more than 600 test sessions, the generated maps exhibited white matter and gray matter values consistent with literature ranges. Additionally, the generated maps showed invariance to scanner hardware and acquisition protocol groups, with inter-group coefficients of variation $\leq$ 1.1\%. Subject-specific analyses demonstrated excellent voxel-wise reproducibility across scanner systems and sequence parameters, with Pearson $r$ and concordance correlation coefficients exceeding 0.82 for T1 and T2. Mean relative voxel-wise differences were low across all quantitative parameters, especially for T2 (< 6\%). These results indicate that the proposed framework can robustly transform diverse clinical conventional MRI data into quantitative maps, potentially paving the way for large-scale quantitative biomarker research. 
+Magnetic resonance imaging (MRI) is a cornerstone of clinical neuroimaging, yet conventional MRIs provide qualitative information heavily dependent on scanner hardware and acquisition settings. While quantitative MRI (qMRI) offers intrinsic tissue parameters, the requirement for specialized acquisition protocols and reconstruction algorithms restricts its availability and impedes large-scale biomarker research.  This study presents a self-supervised physics-guided deep learning framework to infer quantitative T1, T2, and proton-density (PD) maps directly from widely available clinical conventional T1-weighted, T2-weighted, and FLAIR MRIs. The framework was trained and evaluated on a large-scale, clinically heterogeneous dataset comprising 4,121 scan sessions acquired at our instituion over six years on four different $3$~T MRI scanner systems, capturing real-world clinical variability. The framework integrates Bloch-based signal models directly into the training objective. Across more than 600 test sessions, the generated maps exhibited white matter and gray matter values consistent with literature ranges. Additionally, the generated maps showed invariance to scanner hardware and acquisition protocol groups, with inter-group coefficients of variation $\leq$ 1.1\%. Subject-specific analyses demonstrated excellent voxel-wise reproducibility across scanner systems and sequence parameters, with Pearson $r$ and concordance correlation coefficients exceeding 0.82 for T1 and T2. Mean relative voxel-wise differences were low across all quantitative parameters, especially for T2 (< 6\%). These results indicate that the proposed framework can robustly transform diverse clinical conventional MRI data into quantitative maps, potentially paving the way for large-scale quantitative biomarker research. 
 
 
 ## 🛠️ Installation
 
-This project is managed using **[uv](https://github.com/astral-sh/uv)**.
+This project is managed using **[uv](https://github.com/astral-sh/uv)** and  **[Weights & Biases (wandb)](https://wandb.ai/)** is used for experiment tracking.
 
 ### Prerequisites
 
@@ -112,10 +111,10 @@ data_root/
 │   ├── example_001_csf.nii.gz
 │   ├── example_001_gm.nii.gz
 │   └── example_001_wm.nii.gz
-└── dataset_config.csv            # The CSV file defined below
+├── train_example.csv                  
+├── val_example.csv                  
+└── test_example.csv                        
 ```
-
-
 
 ### 2\. Training
 
@@ -123,9 +122,11 @@ data_root/
 
 To train the model:
 
-1. Adjust configs to point to your data.
+1. **Adjust configs to point to your data.**
 
-2. Run:
+2. **Run:**
+<!-- end list -->
+
 ```bash
 uv run train.py --config configs/your_config.yaml
 ```
@@ -136,22 +137,22 @@ We provide a pre-processed example of a healthy volunteer in the `example_data/`
 
 1.  **Download Weights:** Download the pre-trained model weights from the **Releases** page.
 2.  **Place Weights:** Move the downloaded model file into the following directory:
-    `checkpoints/trained_model_paper1/qstar_paper_PD0p1_TV0p01_lq20`
+    `checkpoints/trained_model/qstar_model_PD0p1_TV0p01_lq20`
 3.  **Run Inference:**
 
 <!-- end list -->
 
 ```bash
-uv run test.py --config configs/test_umcu_paper1.yaml
+uv run test.py --config configs/test.yaml
 ```
 
-The results (Quantitative Maps and metrics) will be saved in the specified directory (`results/test_T1wT2wFLAIR_example/` in this case).
+The results (Quantitative Maps and metrics) will be saved in the specified directory in the `checkpoints` folder (`results/test_T1wT2wFLAIR_example/` in this case).
 
 **Example Output:**
 <p align="center">
-  <img src="checkpoints/trained_model_paper/qstar_paper_PD0p1_TV0p01_lq20/test_T1wT2wFLAIR_example/output_figures/example_001_slice_plot.png" width="800">
+  <img src="checkpoints/trained_model/qstar_model_PD0p1_TV0p01_lq20/test_T1wT2wFLAIR_example/output_figures/example_001_slice_plot.png" width="800">
   <br>
-  <i>Figure 1: Representative axial slices of generated quantitative T1, T2, and PD maps from conventional inputs.</i>
+  <i>Figure 1: Representative axial slice of generated quantitative T1, T2, and PD maps from conventional MRIs.</i>
 </p>
 
 -----

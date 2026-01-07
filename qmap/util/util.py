@@ -132,6 +132,14 @@ class RemoveSparseMaskedSlices(tio.Transform):
         
         if not valid_slices.any():
             raise RuntimeError(f"No valid slices for subject {subject.get('subject_id')}")
+        
+        # --- Added Warning Logic ---
+        original_count = mask.shape[-1]
+        kept_count = valid_slices.sum().item()
+        removed_count = original_count - kept_count
+
+        if removed_count > 0:
+            print(f"Warning: Removed {removed_count} slices from subject {subject.get('subject_id', 'unknown')}.")
 
         for image in subject.get_images(intensity_only=False):
             image.set_data(image.data[..., valid_slices])
@@ -140,7 +148,7 @@ class RemoveSparseMaskedSlices(tio.Transform):
 
 class CustomCropPad(tio.Transform):
     """Crops depth slices and pads/crops in-plane to 224x224."""
-    def __init__(self, top_crop=0.10, bottom_crop=0.05):
+    def __init__(self, top_crop=0.05, bottom_crop=0.05):
         super().__init__()
         self.top_crop = top_crop
         self.bottom_crop = bottom_crop

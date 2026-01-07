@@ -1,8 +1,8 @@
 # --- Basic Setup ---
 name: qstar
-suffix: paper_PD0p1_TV0p01_lq20
+suffix: model_PD0p1_TV0p01_lq20
 gpu_ids: '0'
-checkpoints_dir: checkpoints/trained_model_paper
+checkpoints_dir: checkpoints/trained_model
 model: qmap_synth   
 phase: test
 

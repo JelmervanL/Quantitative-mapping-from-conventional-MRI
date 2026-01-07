@@ -13,7 +13,7 @@ class BaseOptions:
         
     def initialize(self, parser):
         # --- config argument ---
-        parser.add_argument('--config', type=str, default='configs/train_umcu_paper1.yaml', help='Path to YAML config file')
+        parser.add_argument('--config', type=str, default='configs/train.yaml', help='Path to YAML config file')
         
         # --- Checkpointing ---
         parser.add_argument('--save_epoch_freq', type=int, default=5, help='frequency of saving checkpoints at the end of epochs')
@@ -54,6 +54,7 @@ class BaseOptions:
         parser.add_argument('--dropout_prob_bottleneck', type=float, default=0.0, help='Dropout prob bottleneck')
         parser.add_argument('--init_type', type=str, default='kaiming', help='network initialization')
         parser.add_argument('--init_gain', type=float, default=0.02, help='scaling factor for init')
+        parser.add_argument('--verbose', action='store_true', help='print model architecture')
 
         # --- Training Loop ---
         parser.add_argument('--phase', type=str, default='train', help='train, val, test')
@@ -75,7 +76,6 @@ class BaseOptions:
         parser.add_argument('--lr_decay_iters', type=int, default=50, help='multiply by a gamma every lr_decay_iters')
         parser.add_argument('--niter_decay', type=int, default=0, help='# of iter to linearly decay lr')
         parser.add_argument('--beta1', type=float, default=0.9, help='momentum term of adam')
-        parser.add_argument('--use_mixed_precision', action='store_true', help='use mixed precision')
 
         # --- Losses ---
         parser.add_argument('--loss_content_I_l1', type=float, default=0, help='content loss, l1')
@@ -93,7 +93,6 @@ class BaseOptions:
         parser.add_argument("--oversample_T1w_SE", action="store_true", default=False, help="Oversample minority")
 
         # --- Logging ---
-        parser.add_argument('--verbose', action='store_true', help='print debugging info')
         parser.add_argument('--use_wandb', action='store_true', help='use wandb')
         parser.add_argument('--wandb_project', type=str, default='qmap', help='wandb project name')
         parser.add_argument('--print_freq', type=int, default=100, help='frequency of console print')

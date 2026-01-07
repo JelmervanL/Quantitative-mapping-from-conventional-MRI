@@ -2,15 +2,15 @@
 
 # --- Basic Setup ---
 name: qstar
-suffix: paper_PD0p1_TV0p01_lq20
+suffix: model_PD0p1_TV0p01_lq20
 gpu_ids: '0'
-checkpoints_dir: checkpoints/trained_model_paper_testcode
+checkpoints_dir: checkpoints/trained_model
 model: qmap_synth
 seed: 0
 
 # --- Data ---
-dataroot: /localscratch/jlune/datasets/UMCU/UMCU_paper1_all/
-data_csv_name: _umcu_paper1_parameters_tfe.csv
+dataroot: # set dataset root here
+data_csv_name: # set file name of csv here like: _sequence_parameters.csv
 input_nc: 3
 output_nc: 3
 batchSize: 16
@@ -33,8 +33,8 @@ lr: 0.001
 lr_policy: none
 optimizer: adam
 beta1: 0.9 # Adam beta1
-do_val: false
-eval_size: 0
+do_val: true
+eval_size: 1000
 
 # --- Losses ---
 loss_content_I_l1: 1
@@ -51,10 +51,9 @@ modality_dropout_rate: 0.5
 modality_dropout_max_missing: 1
 modality_dropout_burnin: 0
 
-
 # --- Logging / Eval ---
 use_wandb: true
-wandb_project: uv_test
+wandb_project: # set wandb name here
 calc_additional_metrics: true
 train_phase: generator
 save_epoch_freq: 5
