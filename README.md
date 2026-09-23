@@ -2,6 +2,7 @@
 # Self-Supervised Physics-Guided Quantitative Mapping from Conventional MRI
 
 This repository contains the implementation of the paper: **"Quantitative Mapping from Conventional MRI Using Self-Supervised Physics-Guided Deep Learning: Applications to a Large-Scale, Clinically Heterogeneous Dataset"**.
+
 Published in *Medical Image Analysis*: [doi:10.1016/j.media.2026.104295](https://doi.org/10.1016/j.media.2026.104295)
 
 ## 📋 Abstract
